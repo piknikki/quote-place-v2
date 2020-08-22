@@ -1,27 +1,40 @@
 <template>
-  <div>
-    quotes
-    <div id="card" v-for="quote in quoteList" :key="quote.text">
+  <div id="card-container">
+    <div id="card" v-for="quote in allQuotes" :key="quote.id">
       <div class="card-body">
-          <p>{{ quote.text }} </p>
+          <p>{{ quote.title }} </p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   name: 'quotes',
-  props: ['quoteList']
+  methods: {
+    ...mapActions(['fetchTodos'])
+  },
+  computed: mapGetters(['allQuotes']),
+  created () {
+    this.fetchTodos()
+  }
 }
 </script>
 
 <style scoped>
+#card-container {
+  display: flex;
+  flex-flow: row wrap;
+}
+
 #card {
   background-color: lightskyblue;
   width: 300px;
   height: auto;
   border: 1px solid grey;
+  margin: 20px;
 }
 
 .card-body {

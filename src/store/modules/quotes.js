@@ -1,10 +1,30 @@
 import axios from 'axios'
 
-const state = {}
+const state = {
+  quotes: []
+}
 
-const getters = {}
+const getters = {
+  allQuotes: (state) => state.quotes
+}
 
-const actions = {}
+const actions = {
+  // make a request, get a response, and then call a mutation
+  async fetchTodos ({ commit }) {
+    const response = await axios.get('https://jsonplaceholder.typicode.com/todos?limit=10')
 
-const mutations = {}
+    commit('setQuotes', response.data)
+  }
+}
 
+const mutations = {
+  // quotes here is the response.data being passed down to the component
+  setQuotes: (state, quotes) => (state.quotes = quotes)
+}
+
+export default {
+  state,
+  getters,
+  actions,
+  mutations
+}
