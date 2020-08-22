@@ -1,5 +1,6 @@
 <template>
   <div>
+    quotes
     <div id="card" v-for="quote in quoteList" :key="quote.text">
       <div class="card-body">
           <p>{{ quote.text }} </p>

@@ -25,6 +25,9 @@
 import Quotes from '@/components/Quotes'
 export default {
   name: 'Home',
+  components: {
+    Quotes
+  },
   data () {
     return {
       text: '',
@@ -37,9 +40,6 @@ export default {
       noteColor: '',
       newColor: '#' + 'Math.random()*0xFFFFF<<0).toString(16)'
     }
-  },
-  components: {
-    Quotes
   },
   methods: {
     addQuote () {
