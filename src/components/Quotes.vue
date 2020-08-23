@@ -1,8 +1,14 @@
 <template>
   <div id="card-container">
     <div id="card" v-for="quote in allQuotes" :key="quote.id">
-      <div class="card-body">
-          <p>{{ quote.title }} </p>
+      <div class="card-body" >
+          <p v-bind:style="newColor">
+            {{ quote.title }}
+            <br>
+            <span>
+              <i class="fal fa-trash-alt fa-xs trash-icon" id="trash"></i>
+            </span>
+          </p>
       </div>
     </div>
   </div>
@@ -13,6 +19,13 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'quotes',
+  data () {
+    return {
+      newColor: {
+        background: this.$randomColor()
+      }
+    }
+  },
   methods: {
     ...mapActions(['fetchTodos'])
   },
@@ -27,23 +40,36 @@ export default {
 #card-container {
   display: flex;
   flex-flow: row wrap;
+  justify-content: space-around;
 }
 
-#card {
-  background-color: lightskyblue;
-  width: 300px;
-  height: auto;
-  border: 1px solid grey;
-  margin: 20px;
-}
+/*#card {*/
+/*  width: 300px;*/
+/*  height: 1em;*/
+/*  margin: 20px;*/
+/*  padding: 20px;*/
+/*}*/
 
 .card-body {
   font-family: 'Architects Daughter', cursive;
-  font-size: 2em;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 300px;
+  font-size: 2em;
   margin: 0 auto;
+}
+
+p {
+  padding:10px;
+}
+
+.trash-icon {
+  flex-flow: column wrap;
+  align-self: flex-end;
+  float: right;
+  padding: 25px 5px 5px 25px;
+  font-size: 0.5em;
 }
 
 </style>
