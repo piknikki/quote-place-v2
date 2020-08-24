@@ -6,7 +6,7 @@
             {{ quote.title }}
             <br>
             <span>
-              <i class="fal fa-trash-alt fa-xs trash-icon" id="trash"></i>
+              <i @click="deleteQuote(quote.id)" class="fal fa-trash-alt fa-xs trash-icon" id="trash"></i>
             </span>
           </p>
       </div>
@@ -18,7 +18,7 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  name: 'quotes',
+  name: 'Quotes',
   data () {
     return {
       newColor: {
@@ -27,7 +27,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['fetchTodos'])
+    ...mapActions(['fetchTodos', 'deleteQuote'])
   },
   computed: mapGetters(['allQuotes']),
   created () {
@@ -70,6 +70,7 @@ p {
   float: right;
   padding: 25px 5px 5px 25px;
   font-size: 0.5em;
+  cursor: pointer;
 }
 
 </style>

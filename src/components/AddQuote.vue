@@ -6,7 +6,7 @@
         type="text"
         placeholder="Add a new quote..."
         required />
-<!--      <input type="color" id="favcolor" name="favcolor" v-bind:style="value">-->
+<!--      <input type="color" id="favcolor" name="favcolor" v-bind:style="favcolor">-->
       <button type="submit" >
           <span class="icon">
           <i class="fal fa-comment-alt-smile"></i> </span> Add </button>
@@ -22,16 +22,17 @@ export default {
   data () {
     return {
       title: '',
+      favcolor: '',
       newColor: {
         background: this.$randomColor()
       }
     }
   },
   methods: {
-    ...mapActions(['AddQuote']),
+    ...mapActions(['addQuote']),
     onSubmit (e) {
       e.preventDefault()
-      this.AddQuote(this.title)
+      this.addQuote(this.title)
       this.title = ''
     }
   }
