@@ -2,11 +2,11 @@ const state = {
   quotes: [
     {
       id: 1,
-      title: 'Poop-Tart!!!'
+      title: 'Don\'t facilitate other people\'s bullshit.'
     },
     {
       id: 2,
-      title: 'Can you don\'t??'
+      title: 'Fuck that shit.'
     }
   ]
 }

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img id="logo" alt="Vue logo" src="./assets/logo.png">
-    <h2>hello there, this is straight css no extra help from bootstrap or bulma</h2>
+    <h2>Welcome. Add your favorite quotes.</h2>
     <AddQuote />
     <br>
     <div class="quote-container">
