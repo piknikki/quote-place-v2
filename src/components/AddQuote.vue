@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form @submit="onSubmit">
+    <form @submit.prevent="addQuote">
       <input
         v-model="title"
         type="text"
@@ -15,24 +15,24 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-
 export default {
   name: 'AddQuote',
   data () {
     return {
+      newId: 3,
       title: '',
-      favcolor: '',
+      // favcolor: '',
       newColor: {
-        background: this.$randomColor()
+        background: 'hsl(' + (360 * Math.random()).toString() + ',' +
+          (25 + 70 * Math.random()).toString() + '%,' +
+          (85 + 10 * Math.random()).toString() + '%)'
       }
     }
   },
   methods: {
-    ...mapActions(['addQuote']),
-    onSubmit (e) {
-      e.preventDefault()
-      this.addQuote(this.title)
+    addQuote () {
+      this.$store.dispatch('addQuote', this)
+      this.newId++
       this.title = ''
     }
   }

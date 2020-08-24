@@ -1,12 +1,12 @@
 <template>
   <div id="card-container">
-    <div id="card" v-for="quote in allQuotes" :key="quote.id">
+    <div id="card" v-for="quote in quotes" :key="quote.id">
       <div class="card-body" >
           <p v-bind:style="newColor">
             {{ quote.title }}
             <br>
-            <span>
-              <i @click="deleteQuote(quote.id)" class="fal fa-trash-alt fa-xs trash-icon" id="trash"></i>
+            <span @click="deleteQuote(quote.id)" >
+              <i class="fal fa-trash-alt fa-xs trash-icon" id="trash"></i>
             </span>
           </p>
       </div>
@@ -15,23 +15,26 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'Quotes',
   data () {
     return {
       newColor: {
-        background: this.$randomColor()
+        background: 'hsl(' + (360 * Math.random()).toString() + ',' +
+          (25 + 70 * Math.random()).toString() + '%,' +
+          (85 + 10 * Math.random()).toString() + '%)'
       }
     }
   },
-  methods: {
-    ...mapActions(['fetchTodos', 'deleteQuote'])
+  computed: {
+    quotes () {
+      return this.$store.getters.allQuotes
+    }
   },
-  computed: mapGetters(['allQuotes']),
-  created () {
-    this.fetchTodos()
+  methods: {
+    ...mapActions(['deleteQuote'])
   }
 }
 </script>

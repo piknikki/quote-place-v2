@@ -11,10 +11,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
-// import { v4 as uuidv4 } from 'uuid'
-
 import Quotes from '@/components/Quotes'
 import AddQuote from '@/components/AddQuote'
 
@@ -26,8 +22,10 @@ export default {
   },
   data () {
     return {
-      title: '',
-      quoteList: []
+      quote: {
+        id: '',
+        title: ''
+      }
     }
   }
 }

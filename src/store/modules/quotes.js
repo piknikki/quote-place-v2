@@ -1,7 +1,14 @@
-import axios from 'axios'
-
 const state = {
-  quotes: []
+  quotes: [
+    {
+      id: 1,
+      title: 'Poop-Tart!!!'
+    },
+    {
+      id: 2,
+      title: 'Can you don\'t??'
+    }
+  ]
 }
 
 const getters = {
@@ -10,29 +17,27 @@ const getters = {
 
 const actions = {
   // make a request, get a response, and then call a mutation
-  async fetchTodos ({ commit }) {
-    const response = await axios.get('https://jsonplaceholder.typicode.com/todos?_limit=5')
-    // console.log(response.data)
-    commit('setQuotes', response.data)
+  async addQuote ({ commit }, payload) {
+    commit('ADD_QUOTE', payload)
   },
-  async addQuote ({ commit }, title) {
-    const response = await axios.post('https://jsonplaceholder.typicode.com/todos', { title })
-
-    commit('newQuote', response.data)
-  },
-  async deleteQuote ({ commit }, id) {
-    console.log(id)
-    await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
-
-    commit('removeQuote', id)
+  async deleteQuote ({ commit }, payload) {
+    commit('DELETE_QUOTE', payload)
   }
 }
 
 const mutations = {
-  // quotes here is the response.data being passed down to the component
-  setQuotes: (state, quotes) => (state.quotes = quotes),
-  newQuote: (state, quote) => state.quotes.unshift(quote),
-  removeQuote: (state, id) => (state.quotes = state.quotes.filter(quote => quote.id !== id))
+  ADD_QUOTE: (state, payload) => {
+    var newQuote = {
+      id: payload.newId,
+      title: payload.title
+    }
+    state.quotes.unshift(newQuote)
+  },
+  DELETE_QUOTE: (state, id) => {
+    console.log(state.quotes)
+    const index = state.quotes.findIndex(quote => quote.id === id)
+    state.quotes.splice(index, 1)
+  }
 }
 
 export default {
