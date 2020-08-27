@@ -6,6 +6,14 @@ const state = {
     },
     {
       id: 2,
+      title: 'Sloths are my favorite kind of people.'
+    },
+    {
+      id: 3,
+      title: 'These are not the droids you are looking for.'
+    },
+    {
+      id: 4,
       title: 'F*ck that sh!t.'
     }
   ]
