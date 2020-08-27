@@ -8,18 +8,9 @@
             </span>
 
             <span v-else-if="editing">
-              <form @submit.prevent="updateQuote(quote)">
-                <textarea
-                  v-model="quote.title"
-                  type="text"
-                  required />
-                <button type="submit" class="save-button">
-                  <span class="icon">
-                  <i class="fal fa-save"></i></span> Save </button>
-              </form>
+              <EditQuote />
             </span>
             <br>
-<!--            @click="updateQuote(quote)" -->
 <!--    if editing, include a form to edit current        -->
             <span @click="editToggle">
               <i class="fal fa-edit fa-xs edit-icon" id="edit"></i>
@@ -35,9 +26,11 @@
 
 <script>
 import { mapActions } from 'vuex'
+import EditQuote from '@/components/EditQuote'
 
 export default {
   name: 'Quotes',
+  components: { EditQuote },
   data () {
     return {
       editing: false,
@@ -55,13 +48,6 @@ export default {
   },
   methods: {
     ...mapActions(['deleteQuote', 'updateQuote']),
-    updateQuote (quote) {
-      const editedQuote = {
-        id: quote.id,
-        title: quote.title
-      }
-      this.updateQuote(editedQuote)
-    },
     editToggle () {
       this.editing = !this.editing
     }
