@@ -2,11 +2,11 @@ const state = {
   quotes: [
     {
       id: 1,
-      title: 'Don\'t facilitate other people\'s bullshit.'
+      title: 'Don\'t facilitate other people\'s bullsh!t.'
     },
     {
       id: 2,
-      title: 'Fuck that shit.'
+      title: 'F*ck that sh!t.'
     }
   ]
 }
@@ -22,6 +22,9 @@ const actions = {
   },
   async deleteQuote ({ commit }, payload) {
     commit('DELETE_QUOTE', payload)
+  },
+  async updateQuote ({ commit }, payload) {
+    commit('UPDATE_QUOTE', payload)
   }
 }
 
@@ -37,6 +40,14 @@ const mutations = {
     console.log(state.quotes)
     const index = state.quotes.findIndex(quote => quote.id === id)
     state.quotes.splice(index, 1)
+  },
+  UPDATE_QUOTE: (state, payload) => {
+    // var updatedQuote = state.quotes.find(quote => quote.id === payload)
+    // updatedQuote.title = payload.title
+    const idx = state.quotes.findIndex(quote => quote.id === payload.id)
+    if (idx !== -1) {
+      state.quotes.splice(idx, 1, payload)
+    }
   }
 }
 

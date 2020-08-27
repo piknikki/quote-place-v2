@@ -2,9 +2,28 @@
   <div id="card-container">
     <div id="card" v-for="quote in quotes" :key="quote.id">
       <div class="card-body" >
-          <p v-bind:style="newColor">
-            {{ quote.title }}
+          <p v-bind:style="newColor" >
+            <span v-if="!editing">
+              {{ quote.title }}
+            </span>
+
+            <span v-else-if="editing">
+              <form @submit.prevent="updateQuote(quote)">
+                <textarea
+                  v-model="quote.title"
+                  type="text"
+                  required />
+                <button type="submit" class="save-button">
+                  <span class="icon">
+                  <i class="fal fa-save"></i></span> Save </button>
+              </form>
+            </span>
             <br>
+<!--            @click="updateQuote(quote)" -->
+<!--    if editing, include a form to edit current        -->
+            <span @click="editToggle">
+              <i class="fal fa-edit fa-xs edit-icon" id="edit"></i>
+            </span>
             <span @click="deleteQuote(quote.id)" >
               <i class="fal fa-trash-alt fa-xs trash-icon" id="trash"></i>
             </span>
@@ -21,6 +40,7 @@ export default {
   name: 'Quotes',
   data () {
     return {
+      editing: false,
       newColor: {
         background: 'hsl(' + (360 * Math.random()).toString() + ',' +
           (25 + 70 * Math.random()).toString() + '%,' +
@@ -34,7 +54,17 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['deleteQuote'])
+    ...mapActions(['deleteQuote', 'updateQuote']),
+    updateQuote (quote) {
+      const editedQuote = {
+        id: quote.id,
+        title: quote.title
+      }
+      this.updateQuote(editedQuote)
+    },
+    editToggle () {
+      this.editing = !this.editing
+    }
   }
 }
 </script>
@@ -45,13 +75,6 @@ export default {
   flex-flow: row wrap;
   justify-content: space-around;
 }
-
-/*#card {*/
-/*  width: 300px;*/
-/*  height: 1em;*/
-/*  margin: 20px;*/
-/*  padding: 20px;*/
-/*}*/
 
 .card-body {
   font-family: 'Architects Daughter', cursive;
@@ -67,6 +90,15 @@ p {
   padding:10px;
 }
 
+.edit-icon {
+  flex-flow: column wrap;
+  align-self: flex-start;
+  float: left;
+  padding: 25px 5px 5px 25px;
+  font-size: 0.5em;
+  cursor: pointer;
+}
+
 .trash-icon {
   flex-flow: column wrap;
   align-self: flex-end;
@@ -74,6 +106,12 @@ p {
   padding: 25px 5px 5px 25px;
   font-size: 0.5em;
   cursor: pointer;
+}
+
+.save-button {
+  flex-flow: row wrap;
+  align-self: center;
+  float: bottom;
 }
 
 </style>
