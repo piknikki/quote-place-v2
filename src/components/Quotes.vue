@@ -7,14 +7,12 @@
               {{ quote.title }}
             </span>
 
-            <span v-else-if="editing">
-              <EditQuote />
-            </span>
-            <br>
-<!--    if editing, include a form to edit current        -->
-            <span @click="editToggle">
-              <i class="fal fa-edit fa-xs edit-icon" id="edit"></i>
-            </span>
+<!--              <EditQuote v-else-if="editing" v-bind:to="{name: 'edit-quote', params: {title: quote.title}}" />-->
+<!--            <br>-->
+<!--&lt;!&ndash;    if editing, include a form to edit current        &ndash;&gt;-->
+<!--            <span @click="editToggle">-->
+<!--              <i class="fal fa-edit fa-xs edit-icon" id="edit"></i>-->
+<!--            </span>-->
             <span @click="deleteQuote(quote.id)" >
               <i class="fal fa-trash-alt fa-xs trash-icon" id="trash"></i>
             </span>
@@ -26,11 +24,11 @@
 
 <script>
 import { mapActions } from 'vuex'
-import EditQuote from '@/components/EditQuote'
+// import EditQuote from '@/components/EditQuote'
 
 export default {
   name: 'Quotes',
-  components: { EditQuote },
+  // components: { EditQuote },
   data () {
     return {
       editing: false,

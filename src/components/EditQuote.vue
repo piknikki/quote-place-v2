@@ -1,15 +1,15 @@
 <template>
-  <div>
-    <form @submit.prevent="updateQuote(quote)">
-                <textarea
-                  v-model="quote.title"
-                  type="text"
-                  required />
-      <button type="submit" class="save-button">
-                  <span class="icon">
-                  <i class="fal fa-save"></i></span> Save </button>
-    </form>
-  </div>
+  <span>
+<!--    <form @submit.prevent="updateQuote(quote)">-->
+<!--                <textarea-->
+<!--                  v-model="quote.title"-->
+<!--                  type="text"-->
+<!--                  required />-->
+<!--      <button type="submit" class="save-button">-->
+<!--                  <span class="icon">-->
+<!--                  <i class="fal fa-save"></i></span> Save </button>-->
+<!--    </form>-->
+  </span>
 </template>
 
 <script>
